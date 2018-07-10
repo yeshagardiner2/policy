@@ -2,9 +2,9 @@
   <head>
   </head>
   <body>
-      {% for post in site.posts %}
-      <h2>{{ post.title }}</h2>
-      {{ post.content }}
+      {% for page in site.pages %}
+      <h2>{{ page.title }}</h2>
+      {{ page.content }}
       {% endfor %}
 
   </body>
