@@ -1,10 +1,16 @@
-<html>
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
   <head>
+    <meta charset="UTF-8">
+
+{% seo %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   </head>
   <body>
-      {% for post in site.posts %}
-      <h2>{{ post.title }}</h2>
-      {{ post.content }}
-      {% endfor %}
+    <main id="content" class="main-content" role="main">
+      {{ content }}
+    </main>
+
   </body>
 </html>
