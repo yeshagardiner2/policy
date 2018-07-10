@@ -1,6 +1,6 @@
 ---
-layout: page
 title:  "Hi"
+permalink: test
 ---
 
 Testing page!
