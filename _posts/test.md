@@ -4,3 +4,5 @@ permalink: test
 ---
 
 Testing page!
+
+New content
