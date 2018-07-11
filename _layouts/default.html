@@ -18,7 +18,7 @@
     }
     @media only screen and (min-width: 800px) {
       #content {
-        grid-template-columns: 250px minmax(500px, 800px);
+        grid-template-columns: 250px auto;
         grid-column-gap: 20px;
         grid-template-areas:
           "toc policies";
@@ -41,6 +41,10 @@
       grid-area: policies;
       overflow: scroll;
     }
+    #policy-content {
+      max-width: 800px;
+      margin: 10px 20px;
+    }
   </style>
   </head>
   <body>
@@ -53,10 +57,12 @@
         </ul>
       </div>
       <div id="policies">
+        <div id="policy-content">
         {% for policy in site.policies %}
         <h1><a name="{{policy.title | slugify}}">{{ policy.title }}</a></h1>
           {{ policy.content }}
         {% endfor %}
+        </div>
       </div>
     </main>
 
