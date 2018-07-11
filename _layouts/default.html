@@ -5,13 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <style>
+
+    @media only screen and (max-width: 800px) {
+      #content {
+        grid-template-columns: auto;
+        grid-template-rows: max-content max-content;
+        grid-column-gap: 0px;
+        grid-template-areas:
+          "toc"
+          "policies";
+      }
+    }
+    @media only screen and (min-width: 800px) {
+      #content {
+        grid-template-columns: 250px minmax(500px, 800px);
+        grid-column-gap: 20px;
+        grid-template-areas:
+          "toc policies";
+      }
+    }
     #content {
       display: grid;
-      grid-template-columns: 250px auto;
-      grid-column-gap: 20px;
-      grid-template-rows: auto;
-      grid-template-areas:
-        "toc policies";
       position: absolute;
       top: 0;
       bottom: 0;
