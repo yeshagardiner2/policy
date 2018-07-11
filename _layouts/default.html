@@ -4,15 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <style>
+    #content {
+      display: grid;
+      grid-template-columns: 250px auto;
+      grid-column-gap: 20px;
+      grid-template-rows: auto;
+      grid-template-areas:
+        "toc policies";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+
+    #toc {
+      grid-area: toc;
+      overflow: scroll;
+    }
+    #policies {
+      grid-area: policies;
+      overflow: scroll;
+    }
+  </style>
   </head>
   <body>
     <main id="content" class="main-content" role="main">
-      {% for post in site.posts %}
-        {{ post.content }}
-      {% endfor %}
-      {% for page in site.pages %}
-        {{ page.content }}
-      {% endfor %}
+      <div id="toc">
+        <ul>
+        {% for policy in site.policies %}
+        <li><a href="#{{policy.title | slugify}}">{{ policy.title }}</a></h1></li>
+        {% endfor %}
+        </ul>
+      </div>
+      <div id="policies">
+        {% for policy in site.policies %}
+        <h1><a name="{{policy.title | slugify}}">{{ policy.title }}</a></h1>
+          {{ policy.content }}
+        {% endfor %}
+      </div>
     </main>
 
   </body>
