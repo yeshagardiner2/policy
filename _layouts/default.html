@@ -52,23 +52,74 @@
       max-width: 800px;
       margin: 10px 20px;
     }
+    .active {
+      font-weight: bold;
+    }
   </style>
+  <script type="text/javascript">
+    function remove(arr, elem) {
+      var index = arr.indexOf(elem);
+      if (index > -1) {
+        arr.splice(index, 1);
+      }
+    }
+
+    function scrollspy() {
+      console.log("running");
+      const elementList = document.querySelectorAll(".policy");
+      let onPage = [];
+
+      function onObserve(entryList) {
+        console.log(entryList);
+        if (entryList.length) {
+          for (let entry of entryList) {
+            if (entry.isIntersecting) {
+              onPage.push(entry.target);
+            } else {
+              remove(onPage, entry.target);
+            }
+          }
+          if (onPage.length) {
+            for (let elem of onPage) {
+              console.log(elem.dataset.spy);
+            }
+            const first = onPage[0];
+            const tag = first.dataset.spy;
+            const currentlyActive = document.querySelector(".active");
+            if (currentlyActive) {
+              currentlyActive.classList.remove('active');
+            }
+            const headerElem = document.querySelector("[data-spy-header=" + tag + "]");
+            headerElem.classList.add('active');
+
+          }
+        }
+      }
+      const observer = new IntersectionObserver(onObserve, {root: document.querySelector('#content')});
+      for (let elem of elementList) {
+        observer.observe(elem);
+      }
+    }
+    document.addEventListener('DOMContentLoaded', scrollspy);
+  </script>
   </head>
   <body>
     <main id="content" class="main-content" role="main">
       <div id="toc">
         <ul>
         {% for policy in site.policies %}
-        <li><a href="#{{policy.title | slugify}}">{{ policy.title }}</a></h1></li>
+        <li data-spy-header="{{policy.title | slugify}}"><a href="#{{policy.title | slugify}}">{{ policy.title }}</a></h1></li>
         {% endfor %}
         </ul>
       </div>
       <div id="policies">
         <div id="policy-content">
         {% for policy in site.policies %}
-        <h1><a name="{{policy.title | slugify}}">{{ policy.title }}</a></h1>
+        <div class="policy" data-spy="{{policy.title | slugify}}">
+          <h1><a name="{{policy.title | slugify}}">{{ policy.title }}</a></h1>
           {{ policy.content }}
-        {% endfor %}
+        </div>
+          {% endfor %}
         </div>
       </div>
     </main>
