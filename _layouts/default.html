@@ -114,6 +114,7 @@
               console.log(elem.dataset.spy);
             }
             const tag = minElem.dataset.spy;
+            history.replaceState({}, tag, "#"+ tag);
             const currentlyActive = document.querySelector(".active");
             if (currentlyActive) {
               currentlyActive.classList.remove('active');
