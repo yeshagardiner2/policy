@@ -96,6 +96,10 @@
     }
 
     function scrollspy() {
+      // onetime
+      if (window.location.hash) {
+        document.querySelector(window.location.hash).scrollIntoView();
+      }
       const elementList = document.querySelectorAll(".policy");
       let onPage = [];
 
@@ -119,7 +123,7 @@
               }
             }
             const tag = minElem.dataset.spy;
-            history.replaceState({}, tag, "#"+ tag);
+            history.replaceState({}, tag, "#" + tag);
             const currentlyActive = document.querySelector(".active");
             if (currentlyActive) {
               currentlyActive.classList.remove('active');
@@ -150,7 +154,7 @@
         <div id="policy-content">
         {% for policy in site.policies %}
         <div class="policy" data-spy="{{policy.title | slugify}}">
-          <h1><a name="{{policy.title | slugify}}"></a>{{ policy.title }}</h1>
+          <h1 id="{{policy.title | slugify}}">{{ policy.title }}</h1>
           {{ policy.content }}
         </div>
           {% endfor %}
