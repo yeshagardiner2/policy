@@ -27,6 +27,10 @@
           "toc"
           "policies";
       }
+      #toc ul {
+        margin-left: 20px;
+        margin-top: 20px;
+      }
     }
     @media only screen and (min-width: 800px) {
       #content {
@@ -34,6 +38,10 @@
         grid-column-gap: 20px;
         grid-template-areas:
           "toc policies";
+      }
+      #toc ul {
+        margin-left: 40px;
+        margin-top: 20px;
       }
     }
     #content {
@@ -43,13 +51,12 @@
       bottom: 0;
       left: 0;
       right: 0;
+      overflow: auto;
     }
     #toc ul {
       list-style-type: none;
       line-height: 1.8;
       padding-left: 0;
-      margin-left: 40px;
-      margin-top: 20px;
     }
     #toc a {
       text-decoration: none;
@@ -93,7 +100,6 @@
       let onPage = [];
 
       function onObserve(entryList) {
-        console.log(entryList);
         if (entryList.length) {
           for (let entry of entryList) {
             if (entry.isIntersecting) {
@@ -111,7 +117,6 @@
                 minY = elem.getBoundingClientRect().y;
                 minElem = elem;
               }
-              console.log(elem.dataset.spy);
             }
             const tag = minElem.dataset.spy;
             history.replaceState({}, tag, "#"+ tag);
@@ -121,7 +126,6 @@
             }
             const headerElem = document.querySelector("[data-spy-header=" + tag + "]");
             headerElem.classList.add('active');
-
           }
         }
       }
